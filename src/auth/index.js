@@ -34,7 +34,37 @@ const signup=user=>{
      })
  }
 
+const authenticate=(data, next)=>{
+    if (typeof window !=='undefined') {
+
+        localStorage.setItem('jwt', JSON.stringify(data))
+
+        next()
+
+    }
+}
+
+const signout=(next)=>{
+
+    if (typeof window !=='undefined') {
+        localStorage.removeItem('jwt')
+        next()
+        return fetch (`http://localhost:8000/api/signout`, {
+                method:'GET',
+
+        })
+        .then(response=>{
+            console.log('Signout', response)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
+}
+
  module.exports={
      signup,
-     signin
+     signin,
+     authenticate,
+     signout
  }

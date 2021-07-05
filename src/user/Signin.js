@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import Layout from '../core/Layout'
-import {signin} from '../auth/index'
+import {signin, authenticate} from '../auth/index'
 import {Redirect} from 'react-router-dom'
 
 
@@ -33,11 +33,14 @@ const Signin = () => {
                 setValues({...values, error: data.error, loading:false})
                      }
             else{
-                setValues({
-                    ...values,
-                    redirectUserTo:true
-
+                authenticate(data, ()=>{
+                    setValues({
+                        ...values,
+                        redirectUserTo:true
+    
+                    })
                 })
+             
             }
         
         })
@@ -58,7 +61,7 @@ const Signin = () => {
                     <input onChange={handleChange('password')}type='password' className='form-control' value={password}/>
                 </div>
                 <button onClick={clickSubmit} className='btn btn-dark'>
-                    Sign up
+                    Sign in
                 </button>
             </form>
             
