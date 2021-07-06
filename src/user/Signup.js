@@ -55,7 +55,8 @@ const Signup = () => {
 
                 <div className='form-group'>
                     <label className='text-muted'>First Name *</label>
-                    <input onChange={handleChange('firstName')} type='text' className='form-control' value={firstName}/>
+                    <input onChange={handleChange('firstName')} type='text' className='form-control' value={firstName}
+                    autoFocus/>
                 </div>
                 <div className='form-group'>
                     <label className='text-muted'>Last Name *</label>

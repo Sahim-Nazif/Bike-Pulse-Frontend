@@ -55,7 +55,7 @@ const Signin = () => {
 
                 <div className='form-group'>
                     <label className='text-muted'>Email </label>
-                    <input onChange={handleChange('email')} type='email' className='form-control' value={email}/>
+                    <input onChange={handleChange('email')} type='email' className='form-control' value={email} autoFocus/>
                 </div>
               
                 <div className='form-group'>
@@ -95,6 +95,9 @@ const Signin = () => {
                 return <Redirect to='/user/dashboard'/>
             }
             
+        }
+        if (isAuthenticated()) {
+            return <Redirect to='/'/>
         }
     }
     return (
