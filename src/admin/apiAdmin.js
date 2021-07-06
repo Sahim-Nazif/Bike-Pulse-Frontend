@@ -39,7 +39,16 @@ const createCategory=(userId, token, category)=>{
      })
  }
 
+const getCategories=()=>{
 
+    fetch ('http://localhost:8000/api/category/all', {
+        method:'GET'
+    })
+        .then(response=>{
+            return response.json()
+        })
+        .catch(err=>console.log(err))
+}
 
 
  module.exports={
