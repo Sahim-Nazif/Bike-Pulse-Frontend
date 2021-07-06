@@ -4,34 +4,34 @@ import { isAuthenticated } from '../auth'
 import { Link } from 'react-router-dom'
 
 
-const UserDashboard = () => {
+const AdminDashboard = () => {
 
     const { user: { _id, firstName, lastName, email, about, role } } = isAuthenticated()
 
-    const userLinks = () => {
+    const adminLinks = () => {
         return (
 
             <div className='card bg-dark mb-5'>
-                <h4 className='card-header text-light'>{firstName}'s Links</h4>
+                <h4 className='card-header text-light'>Admin's Links</h4>
                 <ul className='list-group'>
                     <li className='list-group-item'>
-                        <Link className='nav-link text-info' to='/cart'>My Cart</Link>
+                        <Link className='nav-link text-info' to='/create/category'>Create Category</Link>
                     </li>
                     <li className='list-group-item'>
-                        <Link className='nav-link text-info' to='/profile/update'>Update Profile</Link>
+                        <Link className='nav-link text-info' to='/create/product'>Create Product</Link>
                     </li>
                 </ul>
             </div>
         )
     }
-    const userInfo = () => {
+    const adminInfo = () => {
         return (
             <div className='card bg-dark mb-5'>
                 <h3 className='card-header text-light'>{firstName}'s Information</h3>
                 <ul className="list-group">
                     <li className='list-group-item'> {firstName} </li>
                     <li className='list-group-item'>{lastName}</li>
-                    <li className='list-group-item'>{about} </li>
+                  
                     <li className='list-group-item'>{email} </li>
                     <li className='list-group-item'>{role === 1 ? 'Admin' : 'Registered User'} </li>
                 </ul>
@@ -40,28 +40,18 @@ const UserDashboard = () => {
         )
     }
 
-    const purchaseHistory = () => {
-        return (
-            <div className='card bg-dark mb-5'>
-                <h3 className='card-header text-light'>Purchase History</h3>
-                <ul className="list-group">
-                    <li className='list-group-item'>History </li>
 
-                </ul>
-            </div>
-        )
-    }
     return (
         <Layout title='Dashboard' description={`Hello ${firstName}  ${lastName}` } className='container' >
         
             <div className='row'>
                 <div className='col-sm-6'>
-                    {userLinks()}
+                    {adminLinks()}
                  
                 </div>
                 <div className='col-sm-6'>
-                    {userInfo()}
-                    {purchaseHistory()}
+                    {adminInfo()}
+             
                 </div>
             </div>
 
@@ -69,4 +59,4 @@ const UserDashboard = () => {
     )
 }
 
-export default UserDashboard
+export default AdminDashboard
