@@ -41,7 +41,7 @@ const createCategory=(userId, token, category)=>{
 
 const getCategories=()=>{
 
-    fetch ('http://localhost:8000/api/category/all', {
+    return fetch ('http://localhost:8000/api/category/all', {
         method:'GET'
     })
         .then(response=>{
@@ -53,5 +53,6 @@ const getCategories=()=>{
 
  module.exports={
      createCategory,
-     createProduct
+     createProduct,
+     getCategories
  }
