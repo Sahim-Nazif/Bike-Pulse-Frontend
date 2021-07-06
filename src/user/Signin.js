@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import Layout from '../core/Layout'
-import {signin, authenticate} from '../auth/index'
+import {signin, authenticate, isAuthenticated} from '../auth/index'
 import {Redirect} from 'react-router-dom'
 
 
@@ -15,7 +15,9 @@ const Signin = () => {
         redirectUserTo:false
 
     })
+
     const { email,password, error, loading, redirectUserTo}=values;
+    const {user}=isAuthenticated()
     //the dynamic value can any input value from the form
     const handleChange=dynamicValue=>event=>{
 
@@ -87,7 +89,12 @@ const Signin = () => {
 
     const redirectUser=()=>{
         if (redirectUserTo) {
-            return <Redirect to='/'/>
+            if (user && user.role===1) {
+                return <Redirect to='/admin/dashboard'/>
+            }else {
+                return <Redirect to='/user/dashboard'/>
+            }
+            
         }
     }
     return (
