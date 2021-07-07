@@ -1,0 +1,16 @@
+
+.nav :hover{
+
+    border-radius:0;
+ 
+   
+}
+.bike-image {
+    min-height:100px;
+}
+@media screen and (max-width:600px) {
+    
+    .jumbotron h2 {
+        margin-top:10px
+    }
+}

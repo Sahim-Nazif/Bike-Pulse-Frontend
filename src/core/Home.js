@@ -38,7 +38,9 @@ const Home = () => {
               
               <h2 className='mb-4'>New Arrival</h2>
             <div className='row'>
+  
             {productsByArrival.map((product, index)=>(<Card key={index} product={product}/>))}
+
             </div>
             <h2 className='mb-4'>Best Sellers</h2>
             <div className='row'>
