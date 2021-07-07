@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link } from 'react-router-dom'
-
+import ShowImage from './ShowImage'
 
 
 const Card = ({product}) => {
@@ -9,6 +9,7 @@ const Card = ({product}) => {
             <div className='card'>
               <strong> <div className='card-header'>{product.name}  </div></strong> 
                 <div className='card-body'>
+                    <ShowImage item={product} url='products'></ShowImage>
                <p>{product.description}</p> 
                <p>${product.price}</p>
                <Link to='/'>

@@ -33,7 +33,7 @@ const Home = () => {
         loadProductsBySell()
     },[])
     return (
-        <Layout title='Bike Pulse' description='You are in the right place to look for top brand bike'
+        <Layout title='Bike Pulse' description='You are in the right place to explore our top brand bikes'
          className='container'>
               
               <h2 className='mb-4'>New Arrival</h2>
