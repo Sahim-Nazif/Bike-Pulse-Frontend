@@ -9,7 +9,18 @@ const getProducts=(sortBy)=>{
         .catch(err=>console.log(err))
 }
 
+const getCategories=()=>{
+
+    return fetch ('http://localhost:8000/api/category/all', {
+        method:'GET'
+    })
+        .then(response=>{
+            return response.json()
+        })
+        .catch(err=>console.log(err))
+}
 
  module.exports={
-    getProducts
+    getProducts,
+    getCategories
  }
