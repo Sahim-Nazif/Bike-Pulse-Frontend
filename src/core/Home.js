@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import Layout from './Layout'
 import { getProducts } from './apiCore'
 import Card from './Card'
+import Search from './Search'
+
 const Home = () => {
 
     const [productsBySell, setProductsBySell]=useState([])
@@ -35,7 +37,7 @@ const Home = () => {
     return (
         <Layout title='Bike Pulse' description='You are in the right place to explore our top brand bikes'
          className='container'>
-              
+              <Search />
               <h2 className='mb-4'>New Arrival</h2>
             <div className='row'>
   

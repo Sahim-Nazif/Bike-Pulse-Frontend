@@ -44,6 +44,18 @@ const getFilteredProducts=(skip, limit, filters={})=>{
      })
  }
 
+ 
+const list=params=>{
+
+    return fetch ('http://localhost:8000/api/category/all', {
+        method:'GET'
+    })
+        .then(response=>{
+            return response.json()
+        })
+        .catch(err=>console.log(err))
+}
+
  module.exports={
     getProducts,
     getCategories,
