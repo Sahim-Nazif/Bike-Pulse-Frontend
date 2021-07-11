@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Layout from './Layout'
 import Card from './Card'
-import { getCategories, getFilteredProducts } from './apiCore'
+import {getCategories, getFilteredProducts } from './apiCore'
 import Checkbox from './Checkbox'
 import { prices } from './FixedPrices'
 import RadioBox from './RadioBox'

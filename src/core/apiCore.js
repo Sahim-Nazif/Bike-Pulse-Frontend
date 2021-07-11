@@ -1,4 +1,6 @@
-const getProducts=(sortBy)=>{
+import queryString from 'query-string'
+
+export const getProducts=(sortBy)=>{
 
     return fetch (`http://localhost:8000/api/products?/sortBy=${sortBy}&order=desc&limit=6`, {
         method:'GET'
@@ -9,7 +11,9 @@ const getProducts=(sortBy)=>{
         .catch(err=>console.log(err))
 }
 
-const getCategories=()=>{
+
+
+export const getCategories=()=>{
 
     return fetch ('http://localhost:8000/api/category/all', {
         method:'GET'
@@ -22,7 +26,7 @@ const getCategories=()=>{
 
 
 
-const getFilteredProducts=(skip, limit, filters={})=>{
+export const getFilteredProducts=(skip, limit, filters={})=>{
     const data={
         limit, skip, filters
     }
@@ -44,10 +48,12 @@ const getFilteredProducts=(skip, limit, filters={})=>{
      })
  }
 
- 
-const list=params=>{
 
-    return fetch ('http://localhost:8000/api/category/all', {
+ export const list=params=>{
+
+    const query=queryString.stringify(params)
+    console.log('query', query)
+    return fetch (`http://localhost:8000/api/products?${query}`, {
         method:'GET'
     })
         .then(response=>{
@@ -55,9 +61,3 @@ const list=params=>{
         })
         .catch(err=>console.log(err))
 }
-
- module.exports={
-    getProducts,
-    getCategories,
-    getFilteredProducts
- }
