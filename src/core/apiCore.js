@@ -53,11 +53,20 @@ export const getFilteredProducts=(skip, limit, filters={})=>{
 
     const query=queryString.stringify(params)
     console.log('query', query)
-    return fetch (`http://localhost:8000/api/products?${query}`, {
+    return fetch (`http://localhost:8000/api/products/search?${query}`, {
         method:'GET'
     })
         .then(response=>{
             return response.json()
         })
         .catch(err=>console.log(err))
+}
+
+export const read=(productId)=>{
+    return fetch (`http://localhost:8000/api/product/${productId}`, {
+        method:'GET',
+
+    }). then(response=>{
+        return response.json()
+    }).catch(err=>console.log(err))
 }
