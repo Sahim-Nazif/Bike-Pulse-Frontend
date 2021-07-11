@@ -31,7 +31,7 @@ const Bike = (props) => {
         className='container'>
            
             <div className='row'>
-               {bike && bike.description && <Card product={bike}/>}
+               {bike && bike.description && <Card product={bike} showViewDetailButton={false}/>}
             </div>
        </Layout>
     )
