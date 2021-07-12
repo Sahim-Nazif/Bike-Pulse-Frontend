@@ -15,7 +15,7 @@ const Card = ({product, showViewDetailButton=true}) => {
         )
     }
  const showStock=(quantity)=>{
-    return quantity >0 ? <span className='badge badge-warning badge-pill mr-2'>In Stock</span> : <span className='badge badge-danger badge-pill mr-2'>Out Of Stock</span>
+    return quantity >0 ? <span className='badge badge-warning badge-pill mr-2'>In Stock {product.quantity}</span>  : quantity.length <2 ? <span className='badge badge-warning badge-pill mr-2'>Only {product.quantity} left in stock.</span> : <span className='badge badge-danger badge-pill mr-2'>Out Of Stock</span>
  }
     return (
         <div className='col-4 mb-3'>
