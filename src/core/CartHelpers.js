@@ -9,12 +9,22 @@ export const addItem=(item, next)=>{
             count:1
         })
 
-        cart=Array.from(new Set(cart.map(()=>(p._id)))).map(id=>{
+        cart=Array.from(new Set(cart.map((p)=>(p._id)))).map(id=>{
             return cart.find(p=>p._id===id)
         })
 
         localStorage.setItem('cart', JSON.stringify(cart))
+        next()
     }
 
 
+}
+
+export const itemTotal=()=> {
+    if (typeof window !=='undefined') {
+        if (localStorage.getItem('cart')) {
+            return JSON.parse( localStorage.getItem('cart')).length 
+        }
+    }
+    return 0
 }
