@@ -11,7 +11,7 @@ import AddCategory from './admin/AddCategory'
 import AddProduct from './admin/AddProuduct'
 import Shop from './core/Shop'
 import Bike from './core/Bike'
-
+import Cart from './core/Cart'
 
 const Routes = () => {
     return (
@@ -27,6 +27,7 @@ const Routes = () => {
                 <AdminRoutes path='/create/category' exact component={AddCategory}/>
                 <AdminRoutes path='/create/product' exact component={AddProduct}/>
                 <Route path='/product/:productId' exact component={Bike}/>
+                <Route path='/cart' exact component={Cart}/>
             </Switch>
         </BrowserRouter>
     )
