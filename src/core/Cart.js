@@ -19,7 +19,8 @@ const Cart = () => {
         <div>
             <h5 className='text-info'>Total ({`${items.length}`}) items in cart</h5>
             <hr/>
-            {items.map((bike, i)=>(<Card key={i} product={bike} showAddToCartButton={false}/>))}
+            {items.map((bike, i)=>(<Card key={i} product={bike} showAddToCartButton={false}
+             cartUpate={true}/>))}
         </div>)
     }
     const noItemsMessage=()=>{
@@ -32,10 +33,10 @@ const Cart = () => {
         className='container-fluid'>
             
             <div className='row'>
-                <div className='col-6'>
+                <div className='col-8'>
                     {items.length >0 ? showItem(items): noItemsMessage()}
                 </div>
-                <div className='col-6'>
+                <div className='col-4'>
                    <p>Show checkout options/shipping address/total update</p>
                 </div>
             </div>

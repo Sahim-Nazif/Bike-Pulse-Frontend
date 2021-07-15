@@ -2,13 +2,13 @@ import React, {useState} from 'react'
 import {Link, Redirect } from 'react-router-dom'
 import ShowImage from './ShowImage'
 import moment from 'moment'
-import { addItem } from './CartHelpers'
+import { addItem,updateItem } from './CartHelpers'
 
 
-const Card = ({product, showViewDetailButton=true, showAddToCartButton=true}) => {
+const Card = ({product, showViewDetailButton=true, showAddToCartButton=true, cartUpate=false}) => {
 
     const  [redirect, setRedirect]=useState(false)
-
+    const [count, setCount]=useState(product.count)
     const showViewButton=()=>{
         return ( 
             showViewDetailButton && (
@@ -41,6 +41,25 @@ const showAddToCartBtn=showAddToCartButton=>{
  const showStock=(quantity)=>{
     return quantity >0 ? <span className='badge badge-warning badge-pill mr-2'>In Stock {product.quantity}</span>  : quantity.length <2 ? <span className='badge badge-warning badge-pill mr-2'>Only {product.quantity} left in stock.</span> : <span className='badge badge-danger badge-pill mr-2'>Out Of Stock</span>
  }
+
+ const handleChange=productId=>event=>{
+     setCount(event.target.value<1 ? 1: event.target.value)
+     if (event.target.value>=1) {
+         updateItem(productId, event.target.value)
+     }
+ }
+ const showCartUpdateOptions=cartUpdate=>{
+     return cartUpdate && (
+                <div className='input-group mb-3'>
+                    <div className="input-group-prepend">
+                        <span className="input-group-text">
+                            Adjust Quantity
+                        </span>
+                    </div>
+                    <input type='number' className='form-control' value={count} onChange={handleChange(product._id)}/>
+
+     </div>)
+ }
     return (
         <div className='col-4 mb-3'>
             <div className='card'>
@@ -58,6 +77,7 @@ const showAddToCartBtn=showAddToCartButton=>{
                   {showViewButton()}
                </Link>
                 {showAddToCartBtn(showAddToCartButton)}
+                {showCartUpdateOptions(cartUpate)}
                 </div>
                
               
