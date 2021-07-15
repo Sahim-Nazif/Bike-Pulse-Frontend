@@ -19,7 +19,7 @@ const Cart = () => {
         <div>
             <h5 className='text-info'>Total ({`${items.length}`}) items in cart</h5>
             <hr/>
-            {items.map((bike, i)=>(<Card key={i} product={bike}/>))}
+            {items.map((bike, i)=>(<Card key={i} product={bike} showAddToCartButton={false}/>))}
         </div>)
     }
     const noItemsMessage=()=>{

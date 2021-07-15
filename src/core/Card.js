@@ -5,7 +5,7 @@ import moment from 'moment'
 import { addItem } from './CartHelpers'
 
 
-const Card = ({product, showViewDetailButton=true}) => {
+const Card = ({product, showViewDetailButton=true, showAddToCartButton=true}) => {
 
     const  [redirect, setRedirect]=useState(false)
 
@@ -31,8 +31,8 @@ const shouldRedirect=redirect=>{
         return <Redirect to='/cart'/>
     }
 }
-const showAddToCartButton=()=>{
-    return ( 
+const showAddToCartBtn=showAddToCartButton=>{
+    return showAddToCartButton &&( 
         <button onClick={addToCart} className='btn btn-outline-info mt-2 mb-2'>
             Add to Cart
         </button>
@@ -57,7 +57,7 @@ const showAddToCartButton=()=>{
                <Link to={`/product/${product._id}`}>
                   {showViewButton()}
                </Link>
-                {showAddToCartButton()}
+                {showAddToCartBtn(showAddToCartButton)}
                 </div>
                
               
