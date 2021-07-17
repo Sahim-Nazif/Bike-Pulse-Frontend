@@ -66,10 +66,11 @@ export const removeItem=(productId, count)=>{
         cart.map((product, i)=>{
 
             if (product._id===productId) {
-                cart[i].count=count
+                cart.splice(i, 1)
             }
         })
 
         localStorage.setItem('cart', JSON.stringify(cart))
     }
+    return cart
 }
