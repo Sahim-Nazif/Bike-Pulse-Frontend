@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Layout from './Layout'
-import { getCart } from './CartHelpers'
+import { getCart} from './CartHelpers'
 import Card from './Card'
 import {Link} from 'react-router-dom'
 
@@ -20,7 +20,7 @@ const Cart = () => {
             <h5 className='text-info'>Total ({`${items.length}`}) items in cart</h5>
             <hr/>
             {items.map((bike, i)=>(<Card key={i} product={bike} showAddToCartButton={false}
-             cartUpate={true}/>))}
+             cartUpate={true}   showRemoveProductButton={true}/>))}
         </div>)
     }
     const noItemsMessage=()=>{
