@@ -12,7 +12,7 @@ const Cart = () => {
     useEffect(() => {
 
             setItems(getCart())
-    }, [])
+    }, [items])
 
     const showItem=items=>{
         return ( 
@@ -33,10 +33,10 @@ const Cart = () => {
         className='container-fluid'>
             
             <div className='row'>
-                <div className='col-8'>
+                <div className='col-9'>
                     {items.length >0 ? showItem(items): noItemsMessage()}
                 </div>
-                <div className='col-4'>
+                <div className='col-3'>
                    <p>Show checkout options/shipping address/total update</p>
                 </div>
             </div>
