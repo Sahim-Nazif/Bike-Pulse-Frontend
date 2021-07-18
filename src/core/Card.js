@@ -53,7 +53,7 @@ const showAddToCartBtn=showAddToCartButton=>{
      }
  }
  const showCartUpdateOptions=cartUpdate=>{
-     return cartUpdate && (
+     return (cartUpdate && (
                 <div className='input-group mb-3'>
                     <div className="input-group-prepend">
                         <span className="input-group-text">
@@ -62,7 +62,7 @@ const showAddToCartBtn=showAddToCartButton=>{
                     </div>
                     <input type='number' className='form-control' value={count} onChange={handleChange(product._id)}/>
 
-     </div>)
+     </div>))
  }
 
  const showRemoveBtn=showRemoveProductButton=>{
@@ -89,8 +89,9 @@ const showAddToCartBtn=showAddToCartButton=>{
                   {showViewButton()}
                </Link>
                 {showAddToCartBtn(showAddToCartButton)}
-                {showRemoveBtn(showRemoveProductButton)}
+               
                 {showCartUpdateOptions(cartUpate)}
+                {showRemoveBtn(showRemoveProductButton)}
                 </div>
                
               
