@@ -1,10 +1,23 @@
 import React, {useState, useEffect} from 'react'
 import Layout from './Layout'
-import { getProducts } from './apiCore'
+import { getBraintreeClientToken } from './apiCore'
 import { isAuthenticated } from '../auth'
 import {Link} from 'react-router-dom'
 
 const Checkout = ({products}) => {
+
+    const [data, setData]=useState({
+        success:false,
+        clientToken:null,
+        error:'',
+        instance:{},
+        address:''
+    })
+ 
+    const userID=isAuthenticated() && isAuthenticated().user._id
+    const token=isAuthenticated() && isAuthenticated().user.token
+    
+
 
     const getTotal=()=>{
         return products.reduce((currentValue, nextValue)=>{
@@ -25,7 +38,7 @@ const Checkout = ({products}) => {
     
     return (
         <div>
-            <h5>Total includes HST: ${getTotal()}</h5>
+            <h5 className='text-danger'>Total includes HST: ${getTotal()}</h5>
             {showCheckout()}
         </div>
     )
