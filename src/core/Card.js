@@ -90,8 +90,9 @@ const showAddToCartBtn=showAddToCartButton=>{
                </Link>
                 {showAddToCartBtn(showAddToCartButton)}
                
-                {showCartUpdateOptions(cartUpate)}
+               
                 {showRemoveBtn(showRemoveProductButton)}
+                {showCartUpdateOptions(cartUpate)}
                 </div>
                
               
