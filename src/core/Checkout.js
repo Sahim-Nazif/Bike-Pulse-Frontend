@@ -3,6 +3,8 @@ import Layout from './Layout'
 import { getBraintreeClientToken } from './apiCore'
 import { isAuthenticated } from '../auth'
 import {Link} from 'react-router-dom'
+import DropIn from 'braintree-web-drop-in-react'
+
 
 const Checkout = ({products}) => {
 
@@ -14,9 +16,23 @@ const Checkout = ({products}) => {
         address:''
     })
  
-    const userID=isAuthenticated() && isAuthenticated().user._id
+    const userId=isAuthenticated() && isAuthenticated().user._id
     const token=isAuthenticated() && isAuthenticated().user.token
     
+
+    const getToken=(userId, token)=>{
+        getBraintreeClientToken(userId, token).then(data=>{
+            if (data.error) {
+                setData({...data, error: data.error})
+            } else {
+                setData({...data, clientToken:data.clientToken})
+            }
+        })
+    }
+
+    useEffect(() => {
+        getToken(userId, token)
+    },[])
 
 
     const getTotal=()=>{
@@ -28,14 +44,26 @@ const Checkout = ({products}) => {
 
     const showCheckout=()=>{
         return isAuthenticated() ? (
-            <button className='btn btn-success'>Checkout</button>
+            <div>{showDropIn()}</div>
         ) :(
             <Link to='/signin'>
                 <button 
                  className='btn btn-info'>Sign in to Checkout
                  </button></Link>
         )}
-    
+    const showDropIn=()=>{
+        return (
+        <div>
+            {data.clientToken !==null && products.length>0 ? (
+                <div>
+                    <DropIn  options={{authorization:data.clientToken}} onInstance={instance=> instance=instance}/>
+                    <button className='btn btn-success'>Checkout</button>
+                </div>
+            ) : null}
+        </div>
+           )
+    }
+ 
     return (
         <div>
             <h5 className='text-danger'>Total includes HST: ${getTotal()}</h5>
