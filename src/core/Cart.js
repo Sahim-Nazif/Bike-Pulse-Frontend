@@ -34,10 +34,10 @@ const Cart = () => {
             
             <div className='row justify-content-start'>
               
-                <div className='col-md-8'>
+                <div className='col-md-9'>
                     {items.length >0 ? showItem(items): noItemsMessage()}
                 </div>
-                <div className=' col-md-4'>
+                <div className=' col-md-3'>
                     <h5 className='text-info' >Your Cart Summary</h5>
                   
                     <Checkout products={items}/>

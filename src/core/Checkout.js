@@ -51,23 +51,47 @@ const Checkout = ({products}) => {
                  className='btn btn-info'>Sign in to Checkout
                  </button></Link>
         )}
+
+    const buy=()=>{
+        //we will nonce to the backend (server)
+        //nonce is the request payment method
+        let nonce;
+        let getNonce=data.instance.requestPaymentMethod()
+        .then(data=>{
+            console.log(data)
+            nonce=data.nonce
+            console.log('send none and total to process:', nonce, getTotal(products))
+        }).catch(error=>{
+            console.log(error)
+            setData({...data, error:error.message})
+        })
+    }
     const showDropIn=()=>{
         return (
-        <div>
+        <div onBlur={()=> setData({...data, error:''})}>
             {data.clientToken !==null && products.length>0 ? (
                 <div>
-                    <DropIn  options={{authorization:data.clientToken}} onInstance={instance=> instance=instance}/>
-                    <button className='btn btn-success'>Checkout</button>
+                    <DropIn  options={{authorization:data.clientToken}} onInstance={instance=>(data.instance=instance)}/>
+                    <button onClick={buy} className='btn btn-success'>Pay Now</button>
                 </div>
             ) : null}
         </div>
            )
     }
- 
+    const showError=error=>{
+        return (
+        <div className='alert alert-danger' style={{display:error ? '' : 'none'}}>
+            {error}
+        </div>
+        )
+    }
     return (
         <div>
             <h5 className='text-danger'>Total includes HST: ${getTotal()}</h5>
+          
             {showCheckout()}
+            {showError(data.error)}
+           
         </div>
     )
 }
