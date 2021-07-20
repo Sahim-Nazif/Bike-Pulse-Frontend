@@ -14,13 +14,13 @@ const Search = () => {
         results:[],
         searched:false
     })
-
-    const {categories, category, search, results,searched}=data
+ const [error, setError]= useState(false)
+    const {categories, category,  search, results,searched}=data
 
     const loadCategories=()=>{
         getCategories().then(data =>{
             if (data.error) {
-                console.log(data.error)
+               setError(data.error)
             } else {
                 setData({...data,categories:data})
             }
