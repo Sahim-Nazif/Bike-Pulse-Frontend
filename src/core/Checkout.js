@@ -86,7 +86,7 @@ const Checkout = ({ products }) => {
             <div onBlur={() => setData({ ...data, error: '' })}>
                 {data.clientToken !== null && products.length > 0 ? (
                     <div>
-                        <DropIn options={{ authorization: data.clientToken }} onInstance={instance => (data.instance = instance)} />
+                        <DropIn options={{ authorization: data.clientToken}} onInstance={instance => (data.instance = instance)} />
                         <button onClick={buy} className='btn btn-success btn-block'>Pay Now</button>
                     </div>
                 ) : null}
