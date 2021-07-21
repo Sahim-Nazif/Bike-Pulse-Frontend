@@ -3,7 +3,7 @@ import { getBraintreeClientToken, processPayment } from './apiCore'
 import { isAuthenticated } from '../auth'
 import { Link } from 'react-router-dom'
 import DropIn from 'braintree-web-drop-in-react'
-
+import { emptyCart } from './CartHelpers'
 
 const Checkout = ({ products }) => {
 
@@ -69,6 +69,10 @@ const Checkout = ({ products }) => {
                 processPayment(userId, token, paymentData)
                     .then(response => {
                         setData({...data, success:response.success})
+                        emptyCart(()=>{
+                            console.log('payment success')
+                            
+                        })
 
                     })
                     .catch(error => console.log(error))
