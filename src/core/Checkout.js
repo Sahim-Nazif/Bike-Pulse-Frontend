@@ -24,7 +24,7 @@ const Checkout = ({ products }) => {
             if (data.error) {
                 setData({ ...data, error: data.error })
             } else {
-                setData({ ...data, clientToken: data.clientToken })
+                setData({ clientToken: data.clientToken })
             }
         })
     }
@@ -68,8 +68,8 @@ const Checkout = ({ products }) => {
                 }
                 processPayment(userId, token, paymentData)
                     .then(response => {
-                        setState({...data, success:response.success})
-                        
+                        setData({...data, success:response.success})
+
                     })
                     .catch(error => console.log(error))
             }).catch(error => {
@@ -96,12 +96,21 @@ const Checkout = ({ products }) => {
             </div>
         )
     }
+
+    const showSuccess = success => {
+        return (
+            <div className='alert alert-info' style={{ display: success ? '' : 'none' }}>
+                Thanks! Your payment was successful.
+            </div>
+        )
+    }
     return (
         <div>
             <h5 className='text-danger'>Total includes HST: ${getTotal()}</h5>
 
             {showCheckout()}
             {showError(data.error)}
+            {showSuccess(data.success)}
 
         </div>
     )
