@@ -8,11 +8,11 @@ import Checkout from './Checkout'
 const Cart = () => {
 
     const [items, setItems]=useState([])
-
+    const [run, setRun]=useState(false)
     
     useEffect(() => {
         setItems(getCart())
-    }, [items])
+    }, [run])
 
     const showItem=items=>{
         return ( 
@@ -21,6 +21,8 @@ const Cart = () => {
          
             {items.map((bike, i)=>(<Card key={i} product={bike} showAddToCartButton={false}
              cartUpate={true}   showRemoveProductButton={true}/>))}
+             setRun={setRun}
+             run={run}
         </div>)
     }
     const noItemsMessage=()=>{

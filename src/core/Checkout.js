@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { getBraintreeClientToken, processPayment } from './apiCore'
+import { getBraintreeClientToken, processPayment,createOrder } from './apiCore'
 import { isAuthenticated } from '../auth'
 import { Link } from 'react-router-dom'
 import DropIn from 'braintree-web-drop-in-react'
@@ -12,7 +12,8 @@ const Checkout = ({ products }) => {
         clientToken: null,
         error: '',
         instance: {},
-        address: ''
+        address: '',
+        loading: false
     })
 
     const userId = isAuthenticated() && isAuthenticated().user._id
@@ -68,6 +69,18 @@ const Checkout = ({ products }) => {
                 }
                 processPayment(userId, token, paymentData)
                     .then(response => {
+                      
+                        const createOrderData={
+                            products: products,
+                            transaction_id:response.transaction.id,
+                            amount:response.transaction.amount,
+                            address:data.address
+                        }
+                        createOrder(userId, token, createOrderData)
+                                    .then(response =>{
+                                        
+                                    })
+
                         setData({...data, success:response.success})
                         emptyCart(()=>{
                             console.log('payment success')
@@ -81,16 +94,33 @@ const Checkout = ({ products }) => {
                 setData({ ...data, error: error.message })
             })
     }
+    const handleAddress=event=>{
+
+        setData({...data, address:event.target.value})
+        console.log(event.target.value)
+    }
     const showDropIn = () => {
         return (
+            
             <div onBlur={() => setData({ ...data, error: '' })}>
                 {data.clientToken !== null && products.length > 0 ? (
+                    <>
+                    <div className='form-group mb-3'>
+                        <label className='text-muted'>Delivery Address:</label>
+                        <textarea onChange={handleAddress}
+                                            className='form-control'
+                                            value={data.address}
+                                            placeholder='What is your delivery address?'/>
+                    </div>
                     <div>
                         <DropIn options={{ authorization: data.clientToken}} onInstance={instance => (data.instance = instance)} />
                         <button onClick={buy} className='btn btn-success btn-block'>Pay Now</button>
                     </div>
+                    </>
                 ) : null}
+              
             </div>
+            
         )
     }
     const showError = error => {

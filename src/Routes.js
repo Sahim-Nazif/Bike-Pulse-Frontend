@@ -19,6 +19,7 @@ const Routes = () => {
      
             <Switch>
                 <Route path='/' exact component={Home}/>
+                <Route path='/cart' exact component={Cart}/>
                 <Route path='/shop' exact component={Shop}/>
                 <Route path='/signin' exact component={Signin}/>
                 <Route path='/signup' exact component={Signup}/>
@@ -27,7 +28,7 @@ const Routes = () => {
                 <AdminRoutes path='/create/category' exact component={AddCategory}/>
                 <AdminRoutes path='/create/product' exact component={AddProduct}/>
                 <Route path='/product/:productId' exact component={Bike}/>
-                <Route path='/cart' exact component={Cart}/>
+            
             </Switch>
         </BrowserRouter>
     )
