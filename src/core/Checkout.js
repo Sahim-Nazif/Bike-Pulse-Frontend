@@ -16,6 +16,8 @@ const Checkout = ({ products }) => {
         loading: false
     })
 
+    let shippingAddress=data.address
+    
     const userId = isAuthenticated() && isAuthenticated().user._id
     const token = isAuthenticated() && isAuthenticated().user.token
 
@@ -74,26 +76,30 @@ const Checkout = ({ products }) => {
                             products: products,
                             transaction_id:response.transaction.id,
                             amount:response.transaction.amount,
-                            address:data.address
+                            address:shippingAddress
                         }
                         createOrder(userId, token, createOrderData)
-                                    .then(response =>{
-                                        
-                                    })
-
-                        setData({...data, success:response.success})
-                        emptyCart(()=>{
-                            console.log('payment success')
-                            
+                        .then(response => {
+                            emptyCart(() => {
+                              
+                                setData({
+                                    loading: false,
+                                    success: true
+                                });
+                            });
                         })
-
-                    })
-                    .catch(error => console.log(error))
-            }).catch(error => {
-
-                setData({ ...data, error: error.message })
-            })
-    }
+                      
+                })
+                .catch(error => {
+                    console.log(error);
+                    setData({ loading: false });
+                });
+        })
+        .catch(error => {
+            
+            setData({ ...data, error: error.message });
+        });
+};
     const handleAddress=event=>{
 
         setData({...data, address:event.target.value})
