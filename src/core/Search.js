@@ -68,10 +68,10 @@ const searchedProduct =(results=[])=>{
     const searchForm=()=>{
         return (
         <form onSubmit={searchSubmit} className='mb-4'>
-            <span className='input-group-text'>
+            <span className='input-group-text  search'>
                 <div className="input-group input-group-lg">
                     <div className="input-group-prepend">
-                        <select className='btn mr-2' onChange={handleChange('category')}>
+                        <select className='btn mr-2 select' onChange={handleChange('category')}>
                             <option value='All'>Select Category</option>
                             {categories.map((c, i)=>(<option key={i} value={c._id}>{c.name}</option>))}
                         </select>

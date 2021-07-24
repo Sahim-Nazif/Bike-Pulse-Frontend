@@ -75,7 +75,7 @@ const showAddToCartBtn=showAddToCartButton=>{
     return (
         <div className='col-4 mb-3'>
             <div className='card'>
-              <strong> <div className='card-header'>{product.name}  </div></strong> 
+              <strong> <div className='card-header' >{product.name}  </div></strong> 
                 <div className='card-body'>
                     {shouldRedirect(redirect)}
                     <ShowImage item={product} url='products'></ShowImage>

@@ -51,8 +51,25 @@ const getCategories=()=>{
 }
 
 
+const listOrders=(userId, token)=>{
+
+    return fetch (`http://localhost:8000/api/order/list${userId}`, {
+        method:'GET',
+        headers:{
+            Accept:'application/json',
+            
+            Authorization:`Bearer ${token}`
+
+        }
+    })
+        .then(response=>{
+            return response.json()
+        })
+        .catch(err=>console.log(err))
+}
  module.exports={
      createCategory,
      createProduct,
-     getCategories
+     getCategories,
+     listOrders
  }
