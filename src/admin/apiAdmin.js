@@ -53,7 +53,7 @@ const getCategories=()=>{
 
 const listOrders=(userId, token)=>{
 
-    return fetch (`http://localhost:8000/api/order/list${userId}`, {
+    return fetch (`http://localhost:8000/api/order/list/${userId}`, {
         method:'GET',
         headers:{
             Accept:'application/json',
