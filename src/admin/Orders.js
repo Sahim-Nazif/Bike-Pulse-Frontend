@@ -41,6 +41,19 @@ const Orders = () => {
         }
        
     }
+
+    const showInput=(key, value)=> {
+        return ( 
+        <div className='input-group mb-2 mr-sm-2'>
+            <div className='input-group-prepend'>
+                <div className='input-group-text'>
+                    {key}
+                </div>
+            </div>
+        <input type='text' value={value} className='form-control' readOnly />
+        </div>
+        )
+    }
     return (
         <Layout title='List Of Orers' description={`Hello ${user.firstName} ! Here is the list placed orders?`}
         className='container'>
@@ -48,6 +61,7 @@ const Orders = () => {
            <div className='row'>
                <div className='col-md-8 offset-md-2'>
                 {showTotalOrderPlaced(orders)}
+
                 {orders.map((orders, i)=>{
 
                     return ( 
@@ -65,8 +79,18 @@ const Orders = () => {
                                 <li className='list-group-item'>Shipping Address: {orders.address}</li>
                                 
                             </ul>
-                            <h3 className='mt-4 mb-4 font-italic'> Total products in the orders
-                             {orders.products.length}</h3>
+                            <p className='mt-4 mb-4'> Total products in the orders: 
+                             {orders.products.length}</p>
+                             {orders.products.map((b,bIndex)=>(
+                                 <div className='mb-4' key={bIndex} style={{padding:'20px', border:'1px solid'}}>
+
+                                     {showInput('Product Name', b.name)}
+                                     {showInput('Product price', b.price)}
+                                     {showInput('Product total', b.count)}
+                                     {showInput('Product Id', b._id)}
+                                    
+                                 </div>
+                             ))}
                             </div>
                         
                     )
