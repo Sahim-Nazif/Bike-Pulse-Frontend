@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react'
 import Layout from '../core/Layout'
 import { isAuthenticated } from '../auth'
 import { Link } from 'react-router-dom'
-import {listOrders } from './apiAdmin'
+import {listOrders, getStatusValue } from './apiAdmin'
 import moment from 'moment'
 
 
 const Orders = () => {
 
     const [orders, setOrders]=useState([])
+    const [statusValues, setStatusValues]=useState([])
+
+
 
     const {user, token}= isAuthenticated()
 
@@ -25,8 +28,20 @@ const Orders = () => {
         })
     }
 
+    const loadStatusValues=()=>{
+
+        getStatusValue(user._id, token).then(data=>{
+            if (data.error) {
+                console.log(data.error)
+            } else {
+                setStatusValues(data)
+            }
+        })
+    }
+
     useEffect(() => {
         loadOrders()
+        loadStatusValues()
     },[])
 
     const showTotalOrderPlaced=()=>{
@@ -54,6 +69,23 @@ const Orders = () => {
         </div>
         )
     }
+
+    const handleStatusChange=(e, orderId)=>{
+        console.log('update status')
+    }
+    const showStatus=(o)=>{
+        return ( 
+
+            <div className='form-group'>
+                <h4 className='mark mb-4'>Status: {o.status}</h4>
+                <select className='form-control' onChange={(e)=>handleStatusChange(e, o._id)}>
+                  <option>Update Status</option> 
+                  {statusValues.map((status, index)=>(<option key={index} value={status}>{status}</option>))}
+                </select>
+            </div>
+        )
+
+    }
     return (
         <Layout title='List Of Orers' description={`Hello ${user.firstName} ! Here is the list placed orders?`}
         className='container'>
@@ -71,7 +103,7 @@ const Orders = () => {
                                 <span className='bg-primary'> Order Id: {orders._id}</span>
                             </h3>
                             <ul className="list-group mb-2">
-                                <li className='list-group-item'>{orders.status}</li>
+                                <li className='list-group-item'>{showStatus(orders)}</li>
                                 <li className='list-group-item'>Transaction ID: {orders.transaction_id}</li>
                                 <li className='list-group-item'>Amount: ${orders.amount}</li>
                                 <li className='list-group-item'>Ordered By: {orders.user.firstName} {orders.user.lastName}</li>
