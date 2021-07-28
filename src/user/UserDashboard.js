@@ -18,7 +18,7 @@ const UserDashboard = () => {
                         <Link className='nav-link text-info' to='/cart'>My Cart</Link>
                     </li>
                     <li className='list-group-item'>
-                        <Link className='nav-link text-info' to='/profile/update'>Update Profile</Link>
+                        <Link className='nav-link text-info' to={`/profile/${_id}`}>Update Profile</Link>
                     </li>
                 </ul>
             </div>
