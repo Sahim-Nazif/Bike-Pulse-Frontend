@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Layout from '../core/Layout'
 import { isAuthenticated } from '../auth'
-import { Link } from 'react-router-dom'
-import {listOrders, getStatusValue } from './apiAdmin'
+import {listOrders, getStatusValue,updateOrderStatus } from './apiAdmin'
 import moment from 'moment'
 
 
@@ -71,14 +70,20 @@ const Orders = () => {
     }
 
     const handleStatusChange=(e, orderId)=>{
-        console.log('update status')
+        updateOrderStatus(user._id, token, orderId, e.target.value).then(data=>{
+            if (data.error) {
+                console.log('status failed')
+            } else {
+                loadOrders()
+            }
+        })
     }
     const showStatus=(o)=>{
         return ( 
 
             <div className='form-group'>
                 <h4 className='mark mb-4'>Status: {o.status}</h4>
-                <select className='form-control' onChange={(e)=>handleStatusChange(e, o._id)}>
+                <select className='form-control' onChange={e=>handleStatusChange(e, o._id)}>
                   <option>Update Status</option> 
                   {statusValues.map((status, index)=>(<option key={index} value={status}>{status}</option>))}
                 </select>
