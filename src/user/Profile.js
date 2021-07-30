@@ -1,12 +1,39 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import Layout from '../core/Layout'
 import { isAuthenticated } from '../auth'
+import {read, update, updateUser} from './apiUser'
 import { Link } from 'react-router-dom'
 
 
-const Profile = () => {
+const Profile = ({match}) => {
 
+    const [values, setValues]=useState({
+        firstName:'',
+        lastName:'',
+        email:'',
+        password:'',
+        error:false,
+        success:false
+
+    })
+
+    const {firstName, lastName, email, password, error, success}=values
+    const {user,token}=isAuthenticated()
+    const init=(userId)=>{
+
+        console.log(userId)
+        read(userId, token).then(data=>{
+            if (data.error) {
+                setValues({...values, error:true})
+            } else {
+                setValues({...values, firstName:data.firstName, lastName:data.lastName, email:data.email})
+            }
+        })
+    }
  
+    useEffect(()=>{
+        init(match.params.userId)
+    },[])
     
        
         const today = new Date().getHours();
@@ -24,14 +51,12 @@ const Profile = () => {
             greeting = "Good Night"
         }
 
-
-
+   
     
-    const {user:{firstName, lastName}}=isAuthenticated()
     return (
-        <Layout title='Update Profile' description={`Hey ${greeting}  ${firstName}  ${lastName}` } className='container' >
+        <Layout title='Update Profile' description={`Hey ${greeting}  ${user.firstName}  ${user.lastName}` } className='container' >
         
-        
+            {JSON.stringify(values)}
        
 
     </Layout>
