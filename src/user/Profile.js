@@ -51,12 +51,45 @@ const Profile = ({match}) => {
             greeting = "Good Night"
         }
 
-   
-    
+   const handleChange=e=>{
+
+
+   }
+const clickSubmit=(e)=>{
+
+}
+    const profileUpdate=(firstName, lastName,email, password)=>{
+
+        return ( 
+            <>
+            <form className='mx-auto'>
+
+            
+            <div className="form-group">
+                <label className='text-muted'>First Name</label>
+                <input type='text' onChange={handleChange('firstName') } className='form-control' value={firstName}/>
+            </div>
+             <div className="form-group">
+                <label className='text-muted'>Last Name</label>
+                <input type='text' onChange={handleChange('lastName') } className='form-control' value={lastName}/>
+            </div>
+            <div className="form-group">
+                <label className='text-muted'>Email</label>
+                <input type='text' onChange={handleChange('email') } className='form-control' value={email}/>
+            </div>
+            <div className="form-group">
+                <label className='text-muted'>Password</label>
+                <input type='password' onChange={handleChange('password') } className='form-control' value={password}/>
+            </div>
+            <button onClick={clickSubmit} className='btn btn-dark'>Update Now</button>
+            </form>
+            </>
+        )
+    }
     return (
-        <Layout title='Update Profile' description={`Hey ${greeting}  ${user.firstName}  ${user.lastName}` } className='container' >
+        <Layout title='Update Profile' description={`Hey ${greeting}  ${user.firstName}  ${user.lastName}` } className='container col-md-5 mt-5' >
         
-            {JSON.stringify(values)}
+            {profileUpdate(firstName, lastName,email, password)}
        
 
     </Layout>

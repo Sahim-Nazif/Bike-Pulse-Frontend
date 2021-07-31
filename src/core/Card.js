@@ -37,7 +37,7 @@ const shouldRedirect=redirect=>{
 }
 const showAddToCartBtn=showAddToCartButton=>{
     return showAddToCartButton &&( 
-        <button onClick={addToCart} className='btn btn-outline-info mt-2 mb-2'>
+        <button onClick={addToCart} className='btn btn-outline-info btn-sm mt-2 mb-2'>
             Add to Cart
         </button>
     )
