@@ -143,6 +143,24 @@ const getABike=(productId)=>{
         })
         .catch(err=>console.log(err))
 }
+
+const updateBike=(productId, userId, token, product)=>{
+
+    return fetch (`http://localhost:8000/api/product/update/${productId}/${userId}`, {
+        method:'PUT',
+        headers:{
+            Accept:'application/json',
+            Authorization:`Bearer ${token}`
+
+        },
+        body:product
+    })
+        .then(response=>{
+            return response.json()
+        })
+        .catch(err=>console.log(err))
+}
+
  module.exports={
      createCategory,
      createProduct,
@@ -152,6 +170,7 @@ const getABike=(productId)=>{
      updateOrderStatus,
      getBikes,
      deleteBike,
-     getABike
+     getABike,
+     updateBike
      
  }
