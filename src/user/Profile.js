@@ -11,13 +11,14 @@ const Profile = ({ match }) => {
         firstName: '',
         lastName: '',
         email: '',
+        about:'',
         password: '',
         error: false,
         success: false
 
     })
 
-    const { firstName, lastName, email, password, error, success } = values
+    const { firstName, lastName, email, about, password, error, success } = values
     const { user, token } = isAuthenticated()
     const init = (userId) => {
 
@@ -26,7 +27,8 @@ const Profile = ({ match }) => {
             if (data.error) {
                 setValues({ ...values, error: true })
             } else {
-                setValues({ ...values, firstName: data.firstName, lastName: data.lastName, email: data.email })
+                setValues({ ...values, firstName: data.firstName, lastName: data.lastName, email: data.email,
+                                    about:data.about })
             }
         })
     }
@@ -60,7 +62,7 @@ const Profile = ({ match }) => {
     const clickSubmit = (e) => {
 
         e.preventDefault()
-        update(match.params.userId, token, { firstName, lastName, email, password })
+        update(match.params.userId, token, { firstName, lastName, email, about, password })
             .then(data => {
                 if (data.error) {
 
@@ -72,6 +74,7 @@ const Profile = ({ match }) => {
                                     firstName:data.firstName,
                                     lastName:data.lastName,
                                     email:data.email,
+                                    about:data.about,
                                     success:true})
                         })
                 }
@@ -83,7 +86,7 @@ const Profile = ({ match }) => {
                 return <Redirect to='/user/dashboard'/>
             }
     }
-    const profileUpdate = (firstName, lastName, email, password) => {
+    const profileUpdate = (firstName, lastName, email, about, password) => {
 
         return (
             <>
@@ -103,6 +106,10 @@ const Profile = ({ match }) => {
                         <input type='text' onChange={handleChange('email')} className='form-control' value={email} />
                     </div>
                     <div className="form-group">
+                        <label className='text-muted'>About</label>
+                        <textarea type='text' onChange={handleChange('about')} className='form-control' value={about} />
+                    </div>
+                    <div className="form-group">
                         <label className='text-muted'>Password</label>
                         <input type='password' onChange={handleChange('password')} className='form-control' value={password} />
                     </div>
@@ -114,7 +121,7 @@ const Profile = ({ match }) => {
     return (
         <Layout title='Update Profile' description={`Hey ${greeting}  ${user.firstName}  ${user.lastName}`} className='container col-md-5 mt-5' >
 
-            {profileUpdate(firstName, lastName, email, password)}
+            {profileUpdate(firstName, lastName, email, about,password)}
             {redirectUser(success)}
 
         </Layout>
