@@ -102,12 +102,25 @@ const updateOrderStatus=(userId, token, orderId, status)=>{
         })
         .catch(err=>console.log(err))
 }
+
+const getProducts=()=>{
+
+    return fetch ('http://localhost:8000/api/products', {
+        method:'GET'
+    })
+        .then(response=>{
+            return response.json()
+        })
+        .catch(err=>console.log(err))
+}
+
  module.exports={
      createCategory,
      createProduct,
      getCategories,
      listOrders,
      getStatusValue,
-     updateOrderStatus
+     updateOrderStatus,
+     getProducts
      
  }
