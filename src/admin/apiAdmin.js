@@ -133,7 +133,16 @@ const deleteBike=(productId, userId, token)=>{
         .catch(err=>console.log(err))
 }
 
+const getABike=(productId)=>{
 
+    return fetch (`http://localhost:8000/api/product/${productId}`, {
+        method:'GET'
+    })
+        .then(response=>{
+            return response.json()
+        })
+        .catch(err=>console.log(err))
+}
  module.exports={
      createCategory,
      createProduct,
@@ -142,6 +151,7 @@ const deleteBike=(productId, userId, token)=>{
      getStatusValue,
      updateOrderStatus,
      getBikes,
-     deleteBike
+     deleteBike,
+     getABike
      
  }
