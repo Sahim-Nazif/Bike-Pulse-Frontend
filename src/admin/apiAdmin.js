@@ -103,7 +103,7 @@ const updateOrderStatus=(userId, token, orderId, status)=>{
         .catch(err=>console.log(err))
 }
 
-const getProducts=()=>{
+const getBikes=()=>{
 
     return fetch ('http://localhost:8000/api/products', {
         method:'GET'
@@ -114,6 +114,26 @@ const getProducts=()=>{
         .catch(err=>console.log(err))
 }
 
+
+const deleteBike=(productId, userId, token)=>{
+
+    return fetch (`http://localhost:8000/api/product/delete/${productId}/${userId}`, {
+        method:'DELETE',
+        headers:{
+            Accept:'application/json',
+            'Content-Type':'application/json',
+            Authorization:`Bearer ${token}`
+
+        },
+      
+    })
+        .then(response=>{
+            return response.json()
+        })
+        .catch(err=>console.log(err))
+}
+
+
  module.exports={
      createCategory,
      createProduct,
@@ -121,6 +141,7 @@ const getProducts=()=>{
      listOrders,
      getStatusValue,
      updateOrderStatus,
-     getProducts
+     getBikes,
+     deleteBike
      
  }
