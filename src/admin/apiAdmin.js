@@ -105,7 +105,7 @@ const updateOrderStatus=(userId, token, orderId, status)=>{
 
 const getBikes=()=>{
 
-    return fetch ('http://localhost:8000/api/products', {
+    return fetch ('http://localhost:8000/api/products?limit=undefined', {
         method:'GET'
     })
         .then(response=>{
