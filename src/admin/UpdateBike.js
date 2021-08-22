@@ -35,7 +35,6 @@ const UpdateProduct = ({match}) => {
         category,
         shipping,
         quantity,
-
         loading,
         error,
         createdProduct,
