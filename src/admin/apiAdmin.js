@@ -1,7 +1,7 @@
 
 
 const createCategory=(userId, token, category)=>{
-    return  fetch(`http://localhost:8000/api/category/create/${userId}`, {
+    return  fetch(`${process.env.REACT_APP_API_URL}/api/category/create/${userId}`, {
          method:'POST',
          headers:{
              Accept:'application/json',
@@ -21,7 +21,7 @@ const createCategory=(userId, token, category)=>{
 
 
  const createProduct=(userId, token, product)=>{
-    return  fetch(`http://localhost:8000/api/product/create/${userId}`, {
+    return  fetch(`${process.env.REACT_APP_API_URL}/api/product/create/${userId}`, {
          method:'POST',
          headers:{
              Accept:'application/json',
@@ -41,7 +41,7 @@ const createCategory=(userId, token, category)=>{
 
 const getCategories=()=>{
 
-    return fetch ('http://localhost:8000/api/category/all', {
+    return fetch (`${process.env.REACT_APP_API_URL}/api/category/all`, {
         method:'GET'
     })
         .then(response=>{
@@ -53,7 +53,7 @@ const getCategories=()=>{
 
 const listOrders=(userId, token)=>{
 
-    return fetch (`http://localhost:8000/api/order/list/${userId}`, {
+    return fetch (`${process.env.REACT_APP_API_URL}/api/order/list/${userId}`, {
         method:'GET',
         headers:{
             Accept:'application/json',
@@ -70,7 +70,7 @@ const listOrders=(userId, token)=>{
 
 const getStatusValue=(userId, token)=>{
 
-    return fetch (`http://localhost:8000/api/order/status-values/${userId}`, {
+    return fetch (`${process.env.REACT_APP_API_URL}/api/order/status-values/${userId}`, {
         method:'GET',
         headers:{
             Accept:'application/json',
@@ -87,7 +87,7 @@ const getStatusValue=(userId, token)=>{
 
 const updateOrderStatus=(userId, token, orderId, status)=>{
 
-    return fetch (`http://localhost:8000/api/order/${orderId}/status/${userId}`, {
+    return fetch (`${process.env.REACT_APP_API_URL}/api/order/${orderId}/status/${userId}`, {
         method:'PUT',
         headers:{
             Accept:'application/json',
@@ -105,7 +105,7 @@ const updateOrderStatus=(userId, token, orderId, status)=>{
 
 const getBikes=()=>{
 
-    return fetch ('http://localhost:8000/api/products?limit=undefined', {
+    return fetch ('${process.env.REACT_APP_API_URL}/api/products?limit=undefined', {
         method:'GET'
     })
         .then(response=>{
@@ -117,7 +117,7 @@ const getBikes=()=>{
 
 const deleteBike=(productId, userId, token)=>{
 
-    return fetch (`http://localhost:8000/api/product/delete/${productId}/${userId}`, {
+    return fetch (`${process.env.REACT_APP_API_URL}/api/product/delete/${productId}/${userId}`, {
         method:'DELETE',
         headers:{
             Accept:'application/json',
@@ -135,7 +135,7 @@ const deleteBike=(productId, userId, token)=>{
 
 const getABike=(productId)=>{
 
-    return fetch (`http://localhost:8000/api/product/${productId}`, {
+    return fetch (`${process.env.REACT_APP_API_URL}/api/product/${productId}`, {
         method:'GET'
     })
         .then(response=>{
@@ -146,7 +146,7 @@ const getABike=(productId)=>{
 
 const updateBike=(productId, userId, token, product)=>{
 
-    return fetch (`http://localhost:8000/api/product/update/${productId}/${userId}`, {
+    return fetch (`${process.env.REACT_APP_API_URL}/api/product/update/${productId}/${userId}`, {
         method:'PUT',
         headers:{
             Accept:'application/json',

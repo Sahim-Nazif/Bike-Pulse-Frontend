@@ -1,5 +1,5 @@
 const signup=user=>{
-    return  fetch(`http://localhost:8000/api/signup`, {
+    return  fetch(`${process.env.REACT_APP_API_URL}/api/signup`, {
          method:'POST',
          headers:{
              Accept:'application/json',
@@ -17,7 +17,7 @@ const signup=user=>{
  }
 
  const signin=user=>{
-    return  fetch(`http://localhost:8000/api/signin`, {
+    return  fetch(`${process.env.REACT_APP_API_URL}/api/signin`, {
          method:'POST',
          headers:{
              Accept:'application/json',
@@ -49,7 +49,7 @@ const signout=(next)=>{
     if (typeof window !=='undefined') {
         localStorage.removeItem('jwt')
         next()
-        return fetch (`http://localhost:8000/api/signout`, {
+        return fetch (`${process.env.REACT_APP_API_URL}/api/signout`, {
                 method:'GET',
 
         })
